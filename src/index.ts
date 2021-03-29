@@ -2,21 +2,22 @@ import { enableES5 } from 'immer'
 export * from 'redux'
 export {
   default as createNextState,
-  Draft,
   current,
   freeze,
   original,
-  isDraft
+  isDraft,
 } from 'immer'
-export {
-  createSelector,
+export type { Draft } from 'immer'
+
+export { createSelector } from 'reselect'
+export type {
   Selector,
   OutputParametricSelector,
   OutputSelector,
-  ParametricSelector
+  ParametricSelector,
 } from 'reselect'
 export { createDraftSafeSelector } from './createDraftSafeSelector'
-export { ThunkAction, ThunkDispatch } from 'redux-thunk'
+export type { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
 // We deliberately enable Immer's ES5 support, on the grounds that
 // we assume RTK will be used with React Native and other Proxy-less
@@ -24,19 +25,14 @@ export { ThunkAction, ThunkDispatch } from 'redux-thunk'
 // we want to ship this in an RTK minor, we should keep the same behavior.
 enableES5()
 
-export {
-  // js
-  configureStore,
-  // types
+export { configureStore } from './configureStore'
+export type {
   ConfigureEnhancersCallback,
   ConfigureStoreOptions,
-  EnhancedStore
+  EnhancedStore,
 } from './configureStore'
-export {
-  // js
-  createAction,
-  getType,
-  // types
+export { createAction, getType } from './createAction'
+export type {
   PayloadAction,
   PayloadActionCreator,
   ActionCreatorWithNonInferrablePayload,
@@ -44,55 +40,37 @@ export {
   ActionCreatorWithPayload,
   ActionCreatorWithoutPayload,
   ActionCreatorWithPreparedPayload,
-  PrepareAction
+  PrepareAction,
 } from './createAction'
-export {
-  // js
-  createReducer,
-  // types
-  Actions,
-  CaseReducer,
-  CaseReducers
-} from './createReducer'
-export {
-  // js
-  createSlice,
-  // types
+export { createReducer } from './createReducer'
+export type { Actions, CaseReducer, CaseReducers } from './createReducer'
+export { createSlice } from './createSlice'
+export type {
   CreateSliceOptions,
   Slice,
   CaseReducerActions,
   SliceCaseReducers,
   ValidateSliceCaseReducers,
   CaseReducerWithPrepare,
-  SliceActionCreator
+  SliceActionCreator,
 } from './createSlice'
 export {
-  // js
   createImmutableStateInvariantMiddleware,
   isImmutableDefault,
-  // types
-  ImmutableStateInvariantMiddlewareOptions
 } from './immutableStateInvariantMiddleware'
+export type { ImmutableStateInvariantMiddlewareOptions } from './immutableStateInvariantMiddleware'
 export {
-  // js
   createSerializableStateInvariantMiddleware,
   findNonSerializableValue,
   isPlain,
-  // types
-  SerializableStateInvariantMiddlewareOptions
 } from './serializableStateInvariantMiddleware'
-export {
-  // js
-  getDefaultMiddleware
-} from './getDefaultMiddleware'
-export {
-  // types
-  ActionReducerMapBuilder
-} from './mapBuilders'
+export type { SerializableStateInvariantMiddlewareOptions } from './serializableStateInvariantMiddleware'
+export { getDefaultMiddleware } from './getDefaultMiddleware'
+export type { ActionReducerMapBuilder } from './mapBuilders'
 export { MiddlewareArray } from './utils'
 
 export { createEntityAdapter } from './entities/create_adapter'
-export {
+export type {
   Dictionary,
   EntityState,
   EntityAdapter,
@@ -101,22 +79,20 @@ export {
   EntityId,
   Update,
   IdSelector,
-  Comparer
+  Comparer,
 } from './entities/models'
 
-export {
+export { createAsyncThunk, unwrapResult } from './createAsyncThunk'
+export type {
   AsyncThunk,
   AsyncThunkOptions,
   AsyncThunkAction,
   AsyncThunkPayloadCreatorReturnValue,
   AsyncThunkPayloadCreator,
-  createAsyncThunk,
-  unwrapResult,
-  SerializedError
+  SerializedError,
 } from './createAsyncThunk'
 
 export {
-  // js
   isAllOf,
   isAnyOf,
   isPending,
@@ -124,10 +100,8 @@ export {
   isFulfilled,
   isAsyncThunkAction,
   isRejectedWithValue,
-  // types
-  ActionMatchingAllOf,
-  ActionMatchingAnyOf
 } from './matchers'
+export type { ActionMatchingAllOf, ActionMatchingAnyOf } from './matchers'
 
 export { nanoid } from './nanoid'
 

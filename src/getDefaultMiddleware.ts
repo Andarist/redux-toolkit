@@ -1,15 +1,13 @@
 import { Middleware, AnyAction } from 'redux'
 import thunkMiddleware, { ThunkMiddleware } from 'redux-thunk'
 import {
-  /* PROD_START_REMOVE_UMD */
   createImmutableStateInvariantMiddleware,
-  /* PROD_STOP_REMOVE_UMD */
-  ImmutableStateInvariantMiddlewareOptions
+  ImmutableStateInvariantMiddlewareOptions,
 } from './immutableStateInvariantMiddleware'
 
 import {
   createSerializableStateInvariantMiddleware,
-  SerializableStateInvariantMiddlewareOptions
+  SerializableStateInvariantMiddlewareOptions,
 } from './serializableStateInvariantMiddleware'
 import { MiddlewareArray } from './utils'
 
@@ -80,7 +78,7 @@ export function getDefaultMiddleware<
   const {
     thunk = true,
     immutableCheck = true,
-    serializableCheck = true
+    serializableCheck = true,
   } = options
 
   let middlewareArray: Middleware<{}, S>[] = new MiddlewareArray()
@@ -97,7 +95,6 @@ export function getDefaultMiddleware<
 
   if (process.env.NODE_ENV !== 'production') {
     if (immutableCheck) {
-      /* PROD_START_REMOVE_UMD */
       let immutableOptions: ImmutableStateInvariantMiddlewareOptions = {}
 
       if (!isBoolean(immutableCheck)) {
@@ -107,7 +104,6 @@ export function getDefaultMiddleware<
       middlewareArray.unshift(
         createImmutableStateInvariantMiddleware(immutableOptions)
       )
-      /* PROD_STOP_REMOVE_UMD */
     }
 
     if (serializableCheck) {

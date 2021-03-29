@@ -16,14 +16,20 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/index.js",
-  "module": "dist/redux-toolkit.esm.js",
-  "unpkg": "dist/redux-toolkit.umd.min.js",
-  "types": "dist/typings.d.ts",
+  "main": "dist/reduxjs-toolkit.cjs.js",
+  "module": "dist/reduxjs-toolkit.esm.js",
+  "umd:main": "dist/reduxjs-toolkit.umd.min.js",
+  "unpkg": "dist/reduxjs-toolkit.umd.min.js",
+  "types": "dist/declarations/index.ts",
   "author": "Mark Erikson <mark@isquaredsoftware.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.5",
+    "@babel/preset-typescript": "^7.13.0",
     "@microsoft/api-extractor": "^7.7.0",
+    "@preconstruct/cli": "^2.0.6",
     "@types/jest": "^24.0.11",
     "@types/json-stringify-safe": "^5.0.0",
     "@types/nanoid": "^2.1.0",
@@ -35,18 +41,17 @@
     "eslint-config-react-app": "^5.0.1",
     "invariant": "^2.2.4",
     "json-stringify-safe": "^5.0.1",
-    "prettier": "^1.19.1",
+    "prettier": "^2.2.1",
     "react": "^16.8.6",
-    "rollup-plugin-strip-code": "^0.2.6",
     "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
     "typescript": "^3.9.7",
     "typings-tester": "^0.3.2"
   },
   "scripts": {
-    "build-ci": "tsdx build --format cjs,esm,system,umd --name redux-toolkit && api-extractor run",
-    "build": "tsdx build --format cjs,esm,system,umd --name redux-toolkit && api-extractor run --local",
-    "dev": "tsdx watch  --format cjs,esm,system,umd",
+    "build-ci": "preconstruct build && api-extractor run",
+    "build": "preconstruct build",
+    "setup": "preconstruct dev",
     "format": "prettier --write \"src/**/*.ts\" \"**/*.md\"",
     "format:check": "prettier --list-different \"src/**/*.ts\" \"docs/*/**.md\"",
     "lint": "tsdx lint src",
@@ -55,10 +60,9 @@
     "type-tests": "cd type-tests/files && tsc"
   },
   "files": [
-    "dist/*.js",
-    "dist/*.js.map",
-    "dist/typings.d.ts",
-    "src"
+    "src",
+    "dist",
+    "createSlice"
   ],
   "dependencies": {
     "immer": "^8.0.1",
@@ -77,5 +81,12 @@
         }
       }
     }
+  },
+  "preconstruct": {
+    "umdName": "RTK",
+    "entrypoints": [
+      "./index.ts",
+      "./createSlice.ts"
+    ]
   }
 }
